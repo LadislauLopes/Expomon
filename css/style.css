@@ -50,3 +50,22 @@ body {
 .esconder {
   display: none;
 }
+
+.card {
+  height: 350px; /* Ajuste conforme necessário */
+}
+
+.card-img-top {
+  height: 150px;
+  object-fit: cover; /* Garante que a imagem se ajuste à altura sem distorcer */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title, .card-text {
+  text-align: center;
+}
