@@ -150,9 +150,15 @@ window.onload = function () {
 
   const leitorQrcodeHtml5 = new Html5QrcodeScanner(
     "leitor",
-    { fps: 10, qrbox: { width: 250, height: 250 } },
+    {
+      fps: 10,
+      qrbox: { width: 250, height: 250 },
+      // Adicione a configuração facingMode para a câmera traseira
+      facingMode: "environment", 
+    },
     false
   );
+  
 
   leitorQrcodeHtml5.render(aoSucessoNaLeitura, aoErroNaLeitura);
 }

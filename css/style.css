@@ -43,7 +43,7 @@ body {
 }
 
 .card {
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   /* Espaçamento entre os cartões */
 }
 
@@ -52,7 +52,8 @@ body {
 }
 
 .card {
-  height: 350px; /* Ajuste conforme necessário */
+  height: 300px; /* Ajuste conforme necessário */
+  overflow: auto;
 }
 
 .card-img-top {
