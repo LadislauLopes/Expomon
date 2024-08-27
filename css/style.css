@@ -2,13 +2,16 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
-  margin: 0; /* Remover margens padrão */
-  padding: 0; /* Remover preenchimento padrão */
+  margin: 0;
+  /* Remover margens padrão */
+  padding: 0;
+  /* Remover preenchimento padrão */
 }
 
 /* Estilos para o modal */
 .modal {
-  display: none; /* Inicialmente oculto */
+  display: none;
+  /* Inicialmente oculto */
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -27,7 +30,8 @@ body {
   border-radius: 8px;
   max-width: 500px;
   text-align: center;
-  position: relative; /* Necessário para posicionar o botão de fechar */
+  position: relative;
+  /* Necessário para posicionar o botão de fechar */
 }
 
 .close {
@@ -39,7 +43,8 @@ body {
 }
 
 .card {
-  margin-bottom: 1rem; /* Espaçamento entre os cartões */
+  margin-bottom: 1rem;
+  /* Espaçamento entre os cartões */
 }
 
 .esconder {
