@@ -102,12 +102,29 @@ function solicitarDadosUsuario() {
   const telefone = prompt("Digite seu telefone:");
 
   if (nome && telefone) {
-    const userInfo = {
+    const novoUsuario = {
       userId: localStorage.getItem('userId'),
       nome,
       telefone
     };
-    console.log("Informações do usuário:", userInfo);
+    console.log("Informações do usuário:", novoUsuario);
+    // Envia os dados para o back-end
+    fetch('http://localhost:3000/sorteios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(novoUsuario)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Resposta do servidor:', data);
+      alert("Dados enviados com sucesso!");
+    })
+    .catch(error => {
+      console.error('Erro ao enviar os dados:', error);
+      alert("Ocorreu um erro ao enviar os dados.");
+    });
   } else {
     alert("Por favor, forneça todas as informações.");
   }
