@@ -1,57 +1,61 @@
 /* Estilos globais */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  /* Remover margens padrão */
   padding: 0;
-  /* Remover preenchimento padrão */
+  height: 100vh;
+  background: linear-gradient(135deg, #005A48, #FFD700);
+  background-attachment: fixed; /* Faz o fundo do gradiente fixo */
+  color: #fff;
 }
 
 /* Estilos para o modal */
 .modal {
-  display: none;
-  /* Inicialmente oculto */
+  display: none; /* Inicialmente oculto */
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 1;
+  z-index: 1000; /* Certifique-se de que o modal esteja sobre outros conteúdos */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease; /* Transição suave para a visibilidade */
+  opacity: 0; /* Inicialmente invisível */
 }
 
+/* Estilos para o conteúdo do modal */
 .modal-content {
-  background-color: white;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
   text-align: center;
   position: relative;
   /* Necessário para posicionar o botão de fechar */
+  transform: scale(0.9); /* Adicionado para efeito de escala ao abrir */
+  transition: transform 0.3s ease; /* Transição suave para o efeito de escala */
 }
 
+/* Botão de fechar do modal */
 .close {
   position: absolute;
   top: 10px;
   right: 10px;
   font-size: 24px;
+  color: #000; /* Cor do botão de fechar */
   cursor: pointer;
 }
 
-.card {
-  margin-bottom: 3rem;
-  /* Espaçamento entre os cartões */
+.close:hover {
+  color: #555; /* Cor ao passar o mouse */
 }
 
-.esconder {
-  display: none;
-}
-
+/* Estilos para os cards */
 .card {
+  margin-bottom: 3rem; /* Espaçamento entre os cartões */
   height: 300px; /* Ajuste conforme necessário */
   overflow: auto;
 }
@@ -69,4 +73,29 @@ body {
 
 .card-title, .card-text {
   text-align: center;
+}
+
+/* Estilo para os cards escondidos */
+.esconder {
+  display: none;
+}
+
+/* Estilo para o botão do leitor QR Code */
+#leitor button {
+  background-color: #30259b; /* Cor de fundo do botão */
+  border: none; /* Remove bordas */
+  color: #fff; /* Cor do texto */
+  padding: 15px 32px; /* Espaçamento interno */
+  text-align: center; /* Alinhamento do texto */
+  text-decoration: none; /* Remove sublinhado */
+  display: inline-block; /* Exibição em linha */
+  font-size: 16px; /* Tamanho da fonte */
+  margin: 4px 2px; /* Margens */
+  cursor: pointer; /* Muda o cursor para mãozinha */
+  border-radius: 12px; /* Borda arredondada */
+  transition: background-color 0.3s ease; /* Transição suave para mudança de cor */
+}
+
+#leitor button:hover {
+  background-color: #120d3d; /* Cor de fundo ao passar o mouse */
 }

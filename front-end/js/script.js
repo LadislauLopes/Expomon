@@ -75,6 +75,14 @@ function aoSucessoNaLeitura(textoDecodificado, resultadoDecodificado) {
   if (cardElement && cardElement.classList.contains('esconder')) {
     cardElement.classList.remove('esconder');
     marcarCardComoLiberado(textoDecodificado);
+    
+    // Obtém as informações do card
+    const titulo = cardElement.querySelector('.card-title').textContent;
+    const descricao = cardElement.querySelector('.card-text').textContent;
+    const imagemUrl = cardElement.querySelector('.card-img-top').src;
+    
+    // Abre o modal com as informações do card
+    abrirModal(imagemUrl, descricao);
   }
 }
 
@@ -102,29 +110,12 @@ function solicitarDadosUsuario() {
   const telefone = prompt("Digite seu telefone:");
 
   if (nome && telefone) {
-    const novoUsuario = {
+    const userInfo = {
       userId: localStorage.getItem('userId'),
       nome,
       telefone
     };
-    console.log("Informações do usuário:", novoUsuario);
-    // Envia os dados para o back-end
-    fetch('http://localhost:3000/sorteios', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(novoUsuario)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Resposta do servidor:', data);
-      alert("Dados enviados com sucesso!");
-    })
-    .catch(error => {
-      console.error('Erro ao enviar os dados:', error);
-      alert("Ocorreu um erro ao enviar os dados.");
-    });
+    console.log("Informações do usuário:", userInfo);
   } else {
     alert("Por favor, forneça todas as informações.");
   }
@@ -143,7 +134,6 @@ function exibirCardsLiberados() {
     }
   });
 }
-
 function abrirModal(imagemUrl, descricao) {
   const modal = document.getElementById("modal");
   const modalImage = document.getElementById("modal-image");
@@ -153,11 +143,15 @@ function abrirModal(imagemUrl, descricao) {
   modalDescription.textContent = descricao;
 
   modal.style.display = "flex";
+  modal.style.opacity = "1"; // Torna o modal visível
 }
 
 function fecharModal() {
   const modal = document.getElementById("modal");
-  modal.style.display = "none";
+  modal.style.opacity = "0"; // Torna o modal invisível
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 300); // Tempo da transição definida no CSS
 }
 
 window.onload = function () {
@@ -170,12 +164,36 @@ window.onload = function () {
     {
       fps: 10,
       qrbox: { width: 250, height: 250 },
-      // Adicione a configuração facingMode para a câmera traseira
-      facingMode: "environment", 
+      facingMode: { exact: "environment" }, // Garante que apenas a câmera traseira será usada
+      rememberLastUsedCamera: true, // Lembra a última câmera usada
+      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA, Html5QrcodeScanType.SCAN_TYPE_FILE] // Desabilita tipos de scan não desejados
     },
     false
   );
-  
 
   leitorQrcodeHtml5.render(aoSucessoNaLeitura, aoErroNaLeitura);
+
+  // Altere o texto do botão após o QR Code Scanner ser renderizado
+  setTimeout(() => {
+    const scanButton = document.querySelector("#leitor button");
+    if (scanButton) {
+      scanButton.textContent = "Escanear QR Code"; // Altere para o texto desejado
+    }
+  }, 10); // Atraso para garantir que o botão esteja disponível no DOM
+
+  // Adiciona evento de clique para fechar o modal
+  const closeButton = document.querySelector(".close");
+  if (closeButton) {
+    closeButton.addEventListener("click", fecharModal);
+  }
+
+  // Adiciona evento de clique para fechar o modal ao clicar fora do conteúdo
+  const modal = document.getElementById("modal");
+  if (modal) {
+    modal.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        fecharModal();
+      }
+    });
+  }
 }
